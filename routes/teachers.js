@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 /*
-    At this point, our URL should look something like this:
+    At this point in the code, we're expecting the URL to look something like this:
         http://localhost:3000/teachers
 
     Here, we have two different routers that account for two
@@ -13,18 +13,20 @@ const router = express.Router();
     the POST response, you'll need to prompt the URL with 
     something like Postman.
 */
-
 router
   .route("/")
   .get((req, res) => {
-    res.send("Teachers page");
+    // covers GET requests to http://localhost:3000/teachers/
+    res.send("This is the GET teachers page");
   })
   .post((req, res) => {
-    res.send("POST for teachers");
+    // covers POST requests to http://localhost:3000/teachers/
+    res.send("This is the POST teachers page");
   });
+// We can keep adding HTTP methods to http://localhost:3000/teachers/, so long as it already hasn't been used (so we can't have 2 .get methods).
 
 /*
-    This second route will cover URL's that look like this:
+    This second route will cover URL's structured like this:
         http://localhost:3000/teachers/27
 
     This URL structure is very similar to the URL above, except
@@ -38,10 +40,15 @@ router
 router
   .route("/:teacherID")
   .get((req, res) => {
-    res.send(`GET Teacher ID = ${req.params.learnerID}`);
+    // covers GET requests to http://localhost:3000/teachers/:teacherID/
+    res.send(`GET teacher ID = ${req.params.learnerID}`);
   })
   .put((req, res) => {
-    res.send(`PUT Teacher ID = ${req.params.learnerID}`);
+    // covers PUT requests to http://localhost:3000/teachers/:teacherID/
+    res.send(`PUT teacher ID = ${req.params.learnerID}`);
   });
+// We can keep adding HTTP methods to http://localhost:3000/teachers/:teacherID/, so long as it already hasn't been used (so we can't have 2 .get methods).
 
+// This whole time we've been defining our variable "router," and exporting it like this
+// allows for all the work we've done to be imported in our main file.
 module.exports = router;
